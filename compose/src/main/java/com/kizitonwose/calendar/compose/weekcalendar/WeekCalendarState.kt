@@ -2,6 +2,7 @@ package com.kizitonwose.calendar.compose.weekcalendar
 
 import android.util.Log
 import androidx.compose.foundation.MutatePriority
+import androidx.compose.foundation.ScrollIndicatorState
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.ScrollScope
 import androidx.compose.foundation.gestures.ScrollableState
@@ -323,6 +324,42 @@ public class WeekCalendarState internal constructor(
      */
     override val isScrollInProgress: Boolean
         get() = listState.isScrollInProgress
+
+    /**
+     * Whether this [ScrollableState] can scroll forward (consume a positive delta).
+     * This is typically false if the scroll position is equal to its maximum value, and true otherwise.
+     */
+    override val canScrollForward: Boolean
+        get() = listState.canScrollForward
+
+    /**
+     * Whether this [ScrollableState] can scroll backward (consume a negative delta).
+     * This is typically false if the scroll position is equal to its minimum value, and true otherwise.
+     */
+    override val canScrollBackward: Boolean
+        get() = listState.canScrollBackward
+
+    /**
+     * The value of this property is true under the following scenarios, otherwise it's false.
+     * - This [ScrollableState] is currently scrolling forward.
+     * - This [ScrollableState] was scrolling forward in its last scroll action.
+     */
+    override val lastScrolledForward: Boolean
+        get() = listState.lastScrolledForward
+
+    /**
+     * The value of this property is true under the following scenarios, otherwise it's false.
+     * - This [ScrollableState] is currently scrolling backward.
+     * - This [ScrollableState] was scrolling backward in its last scroll action.
+     */
+    override val lastScrolledBackward: Boolean
+        get() = listState.lastScrolledBackward
+
+    /**
+     * [ScrollIndicatorState] used for drawing a scroll indicator (e.g., a scrollbar).
+     */
+    override val scrollIndicatorState: ScrollIndicatorState?
+        get() = listState.scrollIndicatorState
 
     override fun dispatchRawDelta(delta: Float): Float = listState.dispatchRawDelta(delta)
 
